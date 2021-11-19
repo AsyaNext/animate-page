@@ -1,75 +1,84 @@
 <!DOCTYPE html>
-<!--
-	NOTES:
-	1. All tokens are represented by '$' sign in the template.
-	2. You can write your code only wherever mentioned.
-	3. All occurrences of existing tokens will be replaced by their appropriate values.
-	4. Blank lines will be removed automatically.
-	5. Remove unnecessary comments before creating your template.
--->
-<html>
+<html lang="ru">
+
 <head>
-<meta charset="UTF-8">
-<meta name="authoring-tool" content="Adobe_Animate_CC">
-<title>animate page</title>
-<!-- write your code here -->
-<style>
-  #animation_container {
-	position:absolute;
-	margin:auto;
-	left:0;right:0;
-  }
-</style>
-<script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
-<script src="animate page.js"></script>
-<script>
-var canvas, stage, exportRoot, anim_container, dom_overlay_container, fnStartAnimation;
-function init() {
-	canvas = document.getElementById("canvas");
-	anim_container = document.getElementById("animation_container");
-	dom_overlay_container = document.getElementById("dom_overlay_container");
-	var comp=AdobeAn.getComposition("624CDF80812B3540A7F3D5B47FF44DD1");
-	var lib=comp.getLibrary();
-	var loader = new createjs.LoadQueue(false);
-	loader.addEventListener("fileload", function(evt){handleFileLoad(evt,comp)});
-	loader.addEventListener("complete", function(evt){handleComplete(evt,comp)});
-	var lib=comp.getLibrary();
-	loader.loadManifest(lib.properties.manifest);
-}
-function handleFileLoad(evt, comp) {
-	var images=comp.getImages();	
-	if (evt && (evt.item.type == "image")) { images[evt.item.id] = evt.result; }	
-}
-function handleComplete(evt,comp) {
-	//This function is always called, irrespective of the content. You can use the variable "stage" after it is created in token create_stage.
-	var lib=comp.getLibrary();
-	var ss=comp.getSpriteSheet();
-	var queue = evt.target;
-	var ssMetadata = lib.ssMetadata;
-	for(i=0; i<ssMetadata.length; i++) {
-		ss[ssMetadata[i].name] = new createjs.SpriteSheet( {"images": [queue.getResult(ssMetadata[i].name)], "frames": ssMetadata[i].frames} )
-	}
-	exportRoot = new lib.animatepage();
-	stage = new lib.Stage(canvas);	
-	//Registers the "tick" event listener.
-	fnStartAnimation = function() {
-		stage.addChild(exportRoot);
-		createjs.Ticker.framerate = lib.properties.fps;
-		createjs.Ticker.addEventListener("tick", stage);
-	}	    
-	//Code to support hidpi screens and responsive scaling.
-	AdobeAn.makeResponsive(true,'both',true,1,[canvas,anim_container,dom_overlay_container]);	
-	AdobeAn.compositionLoaded(lib.properties.id);
-	fnStartAnimation();
-}
-</script>
-<!-- write your code here -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Timet Tracker</title>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/styles.min.css">
+  <script src="js/menu.js" defer></script>
 </head>
-<body onload="init();" style="margin:0px;">
-	<div id="animation_container" style="background-color:rgba(255, 255, 255, 1.00); width:1920px; height:1080px">
-		<canvas id="canvas" width="1920" height="1080" style="position: absolute; display: block; background-color:rgba(255, 255, 255, 1.00);"></canvas>
-		<div id="dom_overlay_container" style="pointer-events:none; overflow:hidden; width:1920px; height:1080px; position: absolute; left: 0px; top: 0px; display: block;">
-		</div>
-	</div>
+
+<body>
+  <div class="container">
+    <div class="wrapper">
+      <header class="header">
+        <div class="header-wrapper">
+          <nav class="header-nav">
+            <div class="header-logo">
+              <div class="logo-svg">
+                <img src="img/logo.svg" width="141" height="39" alt="logo">
+              </div>
+            </div>
+            <button class="header-icon-burger" id="btn-burger">
+              <span></span><span></span><span></span>
+            </button>
+            <ul class="menu-list" id="menu">
+              <li class="menu-item"><a herf="#" class="menu-link submenu-link">Features</a>
+                <ul class="menu-list submenu hidden">
+                  <li class="menu-item"><a href="#" class="menu-link">Features</a></li>
+                  <li class="menu-item"><a href="#" class="menu-link">Features</a></li>
+                  <li class="menu-item"><a href="#" class="menu-link">Features</a></li>
+                </ul>
+              </li>
+              <li class="menu-item"><a herf="#" class="menu-link">Clients</a></li>
+              <li class="menu-item"><a herf="#" class="menu-link submenu-link">Pricing</a>
+                <ul class="menu-list submenu hidden">
+                  <li class="menu-item"><a href="#" class="menu-link">Features</a></li>
+                  <li class="menu-item"><a href="#" class="menu-link">Features</a></li>
+                  <li class="menu-item"><a href="#" class="menu-link">Features</a></li>
+                </ul>
+              </li>
+              <li class="menu-item"><a herf="#" class="menu-link submenu-link">Help Center</a>
+                <ul class="menu-list submenu hidden">
+                  <li class="menu-item"><a href="#" class="menu-link">Features</a></li>
+                  <li class="menu-item"><a href="#" class="menu-link">Features</a></li>
+                  <li class="menu-item"><a href="#" class="menu-link">Features</a></li>
+                </ul>
+              </li>
+              <li class="menu-item"><a herf="#" class="menu-link submenu-link">Resources</a>
+                <ul class="menu-list submenu hidden">
+                  <li class="menu-item"><a href="#" class="menu-link">Features</a></li>
+                  <li class="menu-item"><a href="#" class="menu-link">Features</a></li>
+                  <li class="menu-item"><a href="#" class="menu-link">Features</a></li>
+                </ul>
+              </li>
+            </ul>
+            <button class="button nav-button">Try Free</button>
+          </nav>
+          <div class="header-video">
+            <div class="video-wrapper">
+              <video class="video" src="video/Comp_1.mp4" muted autoplay loop playsinline preload="metadata"
+                width="100%">
+              </video>
+              <img src="img/bg.jpg" width="100%" alt="bg">
+              <div style="width: 100%; max-height: 1005px;"></div>
+            </div>
+            <div class="header-text">
+              <div class="text-container">
+                <h1 class="text-title animation">Time Tracking Software</h1>
+                <p class="text-subtitle animation">for making smart moves and reaching new heights</p>
+                <button class="button header-button  animation">Start free trial</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+    </div>
+  </div>
+  <script src="js/video.js" defer></script>
 </body>
+
 </html>
